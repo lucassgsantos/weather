@@ -1,43 +1,30 @@
-# App de Clima
+# Clima
 
-Um app simples para consultar o clima de qualquer cidade do mundo.
+App para consultar o clima de qualquer cidade. Usa a API do OpenWeatherMap para buscar temperatura, umidade, vento, pressao e horarios de nascer/por do sol.
 
 ## Tecnologias
 
 - Next.js 14
-- React 18
 - TypeScript
 - Tailwind CSS
 - OpenWeatherMap API
 
 ## Como rodar
 
-```bash
+```
 npm install
 ```
 
-Configure o `.env.local`:
+Crie um arquivo `.env.local` na raiz:
 
 ```
-OPENWEATHER_API_KEY=sua_chave_api
+OPENWEATHER_API_KEY=sua_chave_aqui
 ```
 
-Pegue sua chave grátis em: https://openweathermap.org/api
+Pegue sua chave gratis em https://openweathermap.org/api
 
-Depois:
-
-```bash
+```
 npm run dev
 ```
 
-Acesse em `http://localhost:3000`
-
-## Features
-
-- Buscar clima por cidade
-- Mostra temperatura, sensação térmica
-- Umidade, vento, pressão
-- Interface responsiva
-- Emojis de clima
-
-Pronto!
+Acesse em http://localhost:3000

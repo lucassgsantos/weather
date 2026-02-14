@@ -3,6 +3,8 @@ export interface WeatherData {
   country: string
   temperature: number
   feelsLike: number
+  tempMin: number
+  tempMax: number
   humidity: number
   pressure: number
   windSpeed: number
@@ -10,15 +12,4 @@ export interface WeatherData {
   icon: string
   sunrise: number
   sunset: number
-  uvIndex: number
-}
-
-export interface ForecastDay {
-  date: string
-  tempMax: number
-  tempMin: number
-  humidity: number
-  windSpeed: number
-  description: string
-  icon: string
 }

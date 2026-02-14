@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'App de Clima',
-  description: 'Consulte o clima de qualquer cidade do mundo',
+  title: 'Clima',
+  description: 'Consulte o clima de qualquer cidade',
 }
 
 export default function RootLayout({
@@ -13,19 +13,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className="bg-gray-50">
-        <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
-          <div className="max-w-4xl mx-auto px-4 py-6">
-            <h1 className="text-3xl font-bold">🌤️ App de Clima</h1>
-            <p className="text-blue-100">Veja o clima de qualquer cidade</p>
+      <body className="bg-gray-100 min-h-screen flex flex-col">
+        <header className="bg-white border-b border-gray-200">
+          <div className="max-w-3xl mx-auto px-4 py-5">
+            <h1 className="text-2xl font-bold text-gray-800">Clima</h1>
           </div>
         </header>
-        <main className="max-w-4xl mx-auto px-4 py-8">
+        <main className="max-w-3xl mx-auto px-4 py-8 flex-1 w-full">
           {children}
         </main>
-        <footer className="bg-gray-800 text-white mt-16 py-8">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <p className="text-gray-400">
+        <footer className="border-t border-gray-200 py-6">
+          <div className="max-w-3xl mx-auto px-4 text-center">
+            <p className="text-sm text-gray-400">
               Dados fornecidos por OpenWeatherMap
             </p>
           </div>
