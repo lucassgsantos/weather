@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isOpenWeatherResponse } from '@/types/openweather'
 
 const API_KEY = process.env.OPENWEATHER_API_KEY || ''
+const CITY_MAX_LENGTH = 100
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const city = searchParams.get('city')
+    const raw = searchParams.get('city')
+    const city = raw?.trim() ?? ''
 
     if (!city) {
       return NextResponse.json({ error: 'Cidade e obrigatoria' }, { status: 400 })
+    }
+
+    if (city.length > CITY_MAX_LENGTH) {
+      return NextResponse.json({ error: 'Nome da cidade muito longo' }, { status: 400 })
     }
 
     if (!API_KEY) {
@@ -23,10 +30,19 @@ export async function GET(request: NextRequest) {
       if (status === 404) {
         return NextResponse.json({ error: 'Cidade nao encontrada' }, { status: 404 })
       }
+      if (status === 401) {
+        return NextResponse.json({ error: 'Chave da API invalida' }, { status: 502 })
+      }
       return NextResponse.json({ error: 'Erro ao buscar dados do clima' }, { status })
     }
 
-    const data = await response.json()
+    const rawData: unknown = await response.json()
+
+    if (!isOpenWeatherResponse(rawData)) {
+      return NextResponse.json({ error: 'Resposta do servico de clima invalida' }, { status: 502 })
+    }
+
+    const data = rawData
 
     return NextResponse.json({
       city: data.name,
@@ -42,6 +58,7 @@ export async function GET(request: NextRequest) {
       icon: data.weather[0].icon,
       sunrise: data.sys.sunrise,
       sunset: data.sys.sunset,
+      ...(typeof data.visibility === 'number' ? { visibility: data.visibility } : {}),
     })
   } catch {
     return NextResponse.json(

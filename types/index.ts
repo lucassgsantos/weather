@@ -12,4 +12,5 @@ export interface WeatherData {
   icon: string
   sunrise: number
   sunset: number
+  visibility?: number
 }

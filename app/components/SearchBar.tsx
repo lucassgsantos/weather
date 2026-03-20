@@ -18,15 +18,20 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mb-8">
+    <form onSubmit={handleSubmit} className="mb-8" aria-busy={loading}>
+      <label htmlFor="city-search" className="sr-only">
+        Nome da cidade
+      </label>
       <div className="flex gap-2">
         <input
+          id="city-search"
           type="text"
           placeholder="Digite o nome da cidade..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           disabled={loading}
+          autoComplete="address-level2"
         />
         <button
           type="submit"
